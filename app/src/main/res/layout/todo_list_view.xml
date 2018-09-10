@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <RadioButton
-        android:id="@+id/radioButton"
+        android:id="@+id/selectButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/titleLabel"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginEnd="16dp"
@@ -26,31 +26,31 @@
         android:autoSizeTextType="uniform"
         android:text="ListTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/radioButton"
-        app:layout_constraintTop_toTopOf="@+id/radioButton" />
+        app:layout_constraintStart_toEndOf="@+id/selectButton"
+        app:layout_constraintTop_toTopOf="@+id/selectButton" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/placeLabel"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:autoSizeTextType="uniform"
         android:text="Place"
-        app:layout_constraintBottom_toBottomOf="@+id/radioButton"
-        app:layout_constraintStart_toEndOf="@+id/radioButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintBottom_toBottomOf="@+id/selectButton"
+        app:layout_constraintStart_toEndOf="@+id/selectButton"
+        app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/dateLabel"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:autoSizeTextType="uniform"
         android:text="Date"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintBottom_toBottomOf="@+id/placeLabel"
+        app:layout_constraintStart_toEndOf="@+id/placeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
 
 </android.support.constraint.ConstraintLayout>
