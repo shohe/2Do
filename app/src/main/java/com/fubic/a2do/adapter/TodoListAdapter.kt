@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.fubic.a2do.item.TodoListItem
+import com.fubic.a2do.view.TodoListView
 
 /**
  * Created by shoheohtani on 2018/09/10.
@@ -30,6 +31,9 @@ class TodoListAdapter(private val context: Context, var items: ArrayList<TodoLis
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val view = (convertView as? TodoListView) ?: TodoListView(context).apply {
+            setTodo(items[position])
+        }
+        return view
     }
 }
