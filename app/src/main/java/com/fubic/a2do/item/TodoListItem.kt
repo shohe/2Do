@@ -6,11 +6,9 @@ import java.util.*
  * Created by shoheohtani on 2018/09/10.
  */
 
-class TodoListItem() {
-
-    var id: Int = 0
-    var title: String = ""
-    var place: String = ""
-    var date: Date = Date()
-
-}
+class TodoListItem(
+        var id: Int,
+        var title: String,
+        var place: String,
+        var date: Date
+)

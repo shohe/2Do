@@ -1,32 +1,35 @@
 package com.fubic.a2do.adapter
 
+import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.fubic.a2do.item.TodoListItem
 
 /**
  * Created by shoheohtani on 2018/09/10.
  */
 
-class TodoListAdapter : BaseAdapter() {
+class TodoListAdapter(private val context: Context, var items: ArrayList<TodoListItem>) : BaseAdapter() {
 
     init {
 
     }
 
     override fun getCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return this.items.count()
     }
 
-    override fun getItem(p0: Int): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getItem(position: Int): Any {
+        return this.items[position]
     }
 
-    override fun getItemId(p0: Int): Long {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
-    override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
