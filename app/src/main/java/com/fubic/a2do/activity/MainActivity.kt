@@ -20,28 +20,17 @@ import java.util.*
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     // XMLOutlet
-    private val todoListView: ListView by lazy {
-        findViewById(R.id.todoListView) as ListView
-    }
-    private val addButton: FloatingActionButton by lazy {
-        findViewById(R.id.addButton) as FloatingActionButton
-    }
+    private val todoListView: ListView by lazy { findViewById(R.id.todoListView) as ListView }
+    private val addButton: FloatingActionButton by lazy { findViewById(R.id.addButton) as FloatingActionButton }
 
-    private val inflater: View by lazy {
-        this.layoutInflater.inflate(R.layout.add_todo_popup_view, null, false) as View
-    }
-    private val dialogTodoTextView : EditText by lazy {
-        inflater.findViewById(R.id.todoTextView) as EditText
-    }
-    private val dialogPlaceTextView : EditText by lazy {
-        inflater.findViewById(R.id.placeTextView) as EditText
-    }
-    private val pickDateButton : Button by lazy {
-        inflater.findViewById(R.id.pickDateButton) as Button
-    }
+    private val inflater: View by lazy { this.layoutInflater.inflate(R.layout.add_todo_popup_view, null, false) as View }
+    private val dialogTodoTextView : EditText by lazy { inflater.findViewById(R.id.todoTextView) as EditText }
+    private val dialogPlaceTextView : EditText by lazy { inflater.findViewById(R.id.placeTextView) as EditText }
+    private val pickDateButton : Button by lazy { inflater.findViewById(R.id.pickDateButton) as Button }
 
     // -
     private var itemAdapter: TodoListAdapter? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +40,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         this.initListView()
         this.initAddButton()
     }
+
 
     fun initListView() {
         val items = arrayListOf<TodoListItem>()
@@ -62,6 +52,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         this.todoListView.adapter = this.itemAdapter
     }
 
+
     fun initAddButton() {
         this.addButton.setOnClickListener {
             this.showDialog()
@@ -71,12 +62,12 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         }
     }
 
+
     fun showDialog() {
+        dialogTodoTextView.requestFocus()
         pickDateButton.setOnClickListener {
             showDatePickerDialog(it)
         }
-
-        dialogTodoTextView.requestFocus()
 
         val dialong = AlertDialog.Builder(this).apply {
             setTitle("Add Todo")
@@ -92,15 +83,16 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
         dialong.show()
     }
 
+
     fun showDatePickerDialog(v: View) {
         val fragment = DatePick()
         fragment.show(fragmentManager, "datePicker")
     }
 
+
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
         val string = String.format(Locale.JAPAN, "%d/%d/%d", year, month + 1, day)
         pickDateButton.text = string
-        Log.i("MainActivity", "onDateSet()")
     }
 
 }
