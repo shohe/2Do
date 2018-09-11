@@ -49,26 +49,30 @@ class MainActivity : AppCompatActivity() {
 
     fun initAddButton() {
         this.addButton.setOnClickListener {
-//            this.initDialog()
+            this.showDialog()
+//            NewTodoDialog(applicationContext).create().show()
         }
     }
 
-//    fun initDialog() {
-//        val inflater = this.layoutInflater.inflate(R.layout.add_todo_popup_view, null, false)
-//        val dialogTodoTextView : EditText by lazy {
-//            inflater.findViewById(R.id.todoTextView) as EditText
-//        }
-//        dialogTodoTextView.requestFocus()
-//
-//        val dialong = AlertDialog.Builder(this).apply {
-//            setTitle("Add Todo")
-//            setView(inflater)
-//            setPositiveButton("Add", DialogInterface.OnClickListener{ _, _ ->
-//                Toast.makeText(context, dialogTodoTextView.text, Toast.LENGTH_LONG).show()
-//            })
-//            setNegativeButton("Cancel", null)
-//        }.create()
-//        dialong.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
-//        dialong.show()
-//    }
+    fun showDialog() {
+        val inflater = this.layoutInflater.inflate(R.layout.add_todo_popup_view, null, false)
+        val dialogTodoTextView : EditText by lazy {
+            inflater.findViewById(R.id.todoTextView) as EditText
+        }
+        val dialogPlaceTextView : EditText by lazy {
+            inflater.findViewById(R.id.placeTextView) as EditText
+        }
+        dialogTodoTextView.requestFocus()
+
+        val dialong = AlertDialog.Builder(this).apply {
+            setTitle("Add Todo")
+            setView(inflater)
+            setPositiveButton("Add", DialogInterface.OnClickListener{ _, _ ->
+                Toast.makeText(context, dialogTodoTextView.text, Toast.LENGTH_LONG).show()
+            })
+            setNegativeButton("Cancel", null)
+        }.create()
+        dialong.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+        dialong.show()
+    }
 }
