@@ -12,6 +12,7 @@ import android.view.WindowManager
 import android.widget.*
 import com.fubic.a2do.R
 import com.fubic.a2do.adapter.TodoListAdapter
+import com.fubic.a2do.extension.toDate
 import com.fubic.a2do.item.TodoListItem
 import com.fubic.a2do.view.DatePick
 import com.fubic.a2do.view.NewTodoDialog
@@ -55,32 +56,8 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
 
     fun initAddButton() {
         this.addButton.setOnClickListener {
-            this.showDialog()
-
-            // todo: separate dialog codes
-            // NewTodoDialog(applicationContext).create().show()
+            NewTodoDialog(this).show()
         }
-    }
-
-
-    fun showDialog() {
-        dialogTodoTextView.requestFocus()
-        pickDateButton.setOnClickListener {
-            showDatePickerDialog(it)
-        }
-
-        val dialong = AlertDialog.Builder(this).apply {
-            setTitle("Add Todo")
-            setView(inflater)
-            setPositiveButton("Add", DialogInterface.OnClickListener{ _, _ ->
-                val item = TodoListItem(itemAdapter!!.items.size + 1, dialogTodoTextView.text.toString(), dialogPlaceTextView.text.toString(), Date())
-                itemAdapter!!.items.add(item)
-                itemAdapter!!.notifyDataSetChanged()
-            })
-            setNegativeButton("Cancel", null)
-        }.create()
-        dialong.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
-        dialong.show()
     }
 
 
