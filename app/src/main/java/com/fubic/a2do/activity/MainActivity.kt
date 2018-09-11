@@ -50,7 +50,9 @@ class MainActivity : AppCompatActivity() {
     fun initAddButton() {
         this.addButton.setOnClickListener {
             this.showDialog()
-//            NewTodoDialog(applicationContext).create().show()
+
+            // todo: separate dialog codes
+            // NewTodoDialog(applicationContext).create().show()
         }
     }
 
@@ -68,7 +70,9 @@ class MainActivity : AppCompatActivity() {
             setTitle("Add Todo")
             setView(inflater)
             setPositiveButton("Add", DialogInterface.OnClickListener{ _, _ ->
-                Toast.makeText(context, dialogTodoTextView.text, Toast.LENGTH_LONG).show()
+                val item = TodoListItem(0, dialogTodoTextView.text.toString(), dialogPlaceTextView.text.toString(), Date())
+                itemAdapter!!.items.add(item)
+                itemAdapter!!.notifyDataSetChanged()
             })
             setNegativeButton("Cancel", null)
         }.create()
