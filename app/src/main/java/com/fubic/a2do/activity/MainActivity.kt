@@ -13,9 +13,15 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     // XMLOutlet
-    private var todoListView: ListView? = null
+    private val todoListView: ListView by lazy {
+        findViewById(R.id.todoListView) as ListView
+    }
+    private val addButton: FloatingActionButton by lazy {
+        findViewById(R.id.addButton) as FloatingActionButton
+    }
+
     private var itemAdapter: TodoListAdapter? = null
-    private var addButton: FloatingActionButton? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,20 +32,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initListView() {
-        this.todoListView = findViewById(R.id.todoListView) as ListView
-
         val items = arrayListOf<TodoListItem>()
         for (i in 0..5) {
             val item = TodoListItem(i, "studying kotlin", "office", Date())
             items.add(item)
         }
         this.itemAdapter = TodoListAdapter(applicationContext, items)
-        this.todoListView!!.adapter = this.itemAdapter
+        this.todoListView.adapter = this.itemAdapter
     }
 
     fun initAddButton() {
-        this.addButton = findViewById(R.id.addButton) as FloatingActionButton
-        this.addButton!!.setOnClickListener {
+        this.addButton.setOnClickListener {
             Log.d("MainActivity", "msg")
         }
     }
