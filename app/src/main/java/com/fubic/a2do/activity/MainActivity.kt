@@ -1,13 +1,19 @@
 package com.fubic.a2do.activity
 
+import android.content.DialogInterface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
+import android.support.v7.app.AlertDialog
 import android.util.Log
+import android.view.WindowManager
+import android.widget.EditText
 import android.widget.ListView
+import android.widget.Toast
 import com.fubic.a2do.R
 import com.fubic.a2do.adapter.TodoListAdapter
 import com.fubic.a2do.item.TodoListItem
+import com.fubic.a2do.view.NewTodoDialog
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val addButton: FloatingActionButton by lazy {
         findViewById(R.id.addButton) as FloatingActionButton
     }
-
+    // -
     private var itemAdapter: TodoListAdapter? = null
 
 
@@ -43,9 +49,26 @@ class MainActivity : AppCompatActivity() {
 
     fun initAddButton() {
         this.addButton.setOnClickListener {
-            Log.d("MainActivity", "msg")
+//            this.initDialog()
         }
     }
 
-
+//    fun initDialog() {
+//        val inflater = this.layoutInflater.inflate(R.layout.add_todo_popup_view, null, false)
+//        val dialogTodoTextView : EditText by lazy {
+//            inflater.findViewById(R.id.todoTextView) as EditText
+//        }
+//        dialogTodoTextView.requestFocus()
+//
+//        val dialong = AlertDialog.Builder(this).apply {
+//            setTitle("Add Todo")
+//            setView(inflater)
+//            setPositiveButton("Add", DialogInterface.OnClickListener{ _, _ ->
+//                Toast.makeText(context, dialogTodoTextView.text, Toast.LENGTH_LONG).show()
+//            })
+//            setNegativeButton("Cancel", null)
+//        }.create()
+//        dialong.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+//        dialong.show()
+//    }
 }
