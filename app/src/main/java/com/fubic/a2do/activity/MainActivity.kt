@@ -66,8 +66,13 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
 
     private fun initRemoveButton() {
         this.animateRemoveButton(true)
+
         this.removeButton.setOnClickListener {
-            Log.d("-", "remove")
+            for (id in this.selectedItems) {
+                this.itemAdapter!!.items.remove(this.itemAdapter!!.getItem(id))
+            }
+            this.itemAdapter!!.notifyDataSetChanged()
+            this.selectedItems.clear()
         }
     }
 
