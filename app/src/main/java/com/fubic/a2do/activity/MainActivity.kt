@@ -4,19 +4,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.util.Log
-import android.view.View
 import android.widget.*
 import com.fubic.a2do.R
 import com.fubic.a2do.adapter.TodoListAdapter
 import com.fubic.a2do.item.TodoListItem
-import com.fubic.a2do.view.DatePick
 import com.fubic.a2do.view.NewTodoDialog
 import com.fubic.a2do.view.NewTodoDialogDelegate
 import java.util.*
-import android.content.Intent
-import android.widget.Toast
-import android.widget.AdapterView
-import com.fubic.a2do.view.TodoListView
 
 
 class MainActivity : AppCompatActivity(), NewTodoDialogDelegate {
@@ -56,6 +50,7 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate {
         this.addButton.setOnClickListener {
             val ntd = NewTodoDialog(this)
             ntd.delegate = this
+            ntd.fragmentManager = fragmentManager
             ntd.show()
         }
     }
@@ -76,18 +71,6 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate {
             return@setOnItemLongClickListener true
         }
     }
-
-    
-//    private fun showDatePickerDialog(v: View) {
-//        val fragment = DatePick()
-//        fragment.show(fragmentManager, "datePicker")
-//    }
-
-
-//    override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
-//        val string = String.format(Locale.JAPAN, "%d/%d/%d", year, month + 1, day)
-//        pickDateButton.text = string
-//    }
 
 
     // ---
