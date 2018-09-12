@@ -14,6 +14,7 @@ import com.fubic.a2do.view.TodoListView
 import com.fubic.a2do.view.TodoListViewDelegate
 import kotlinx.android.synthetic.main.activity_main.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDelegate {
@@ -21,9 +22,11 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
     // XMLOutlet
     private val todoListView: ListView by lazy { findViewById(R.id.todoListView) as ListView }
     private val addButton: FloatingActionButton by lazy { findViewById(R.id.addButton) as FloatingActionButton }
+    private val removeButton: FloatingActionButton by lazy { findViewById(R.id.removeButton) as FloatingActionButton }
 
     // -
     private var itemAdapter: TodoListAdapter? = null
+    private var selectedItems: ArrayList<Int> = ArrayList()
 
 
 
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
         setContentView(R.layout.activity_main)
 
         this.initAddButton()
+        this.initRemoveButton()
         this.initListView()
         this.addTapHandler(this.todoListView)
         this.addLongTapHandler(this.todoListView)
@@ -60,10 +64,17 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
     }
 
 
+    private fun initRemoveButton() {
+        this.animateRemoveButton(true)
+        this.removeButton.setOnClickListener {
+            Log.d("-", "remove")
+        }
+    }
+
+
     private fun addTapHandler(listView: ListView) {
         listView.setOnItemClickListener { parent, view, position, id ->
             val item = listView.adapter.getItem(position) as TodoListItem
-            Log.d("item id:", "${item.id}")
         }
     }
 
@@ -73,6 +84,27 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
             this.itemAdapter!!.items.remove(this.itemAdapter!!.getItem(position))
             this.itemAdapter!!.notifyDataSetChanged()
             return@setOnItemLongClickListener true
+        }
+    }
+
+
+    private fun animateAddButton(isHidden: Boolean) {
+        if (isHidden) {
+            this.addButton.hide()
+            this.addButton.animate().translationY(300.0f).alpha(1.0f).setListener(null)
+        } else {
+            this.addButton.show()
+            this.addButton.animate().translationY(0.0f).alpha(1.0f).setListener(null)
+        }
+    }
+
+    private fun animateRemoveButton(isHidden: Boolean) {
+        if (isHidden) {
+            this.removeButton.hide()
+            this.removeButton.animate().translationY(300.0f).alpha(1.0f).setListener(null)
+        } else {
+            this.removeButton.show()
+            this.removeButton.animate().translationY(0.0f).alpha(1.0f).setListener(null)
         }
     }
 
@@ -89,7 +121,17 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
     // ---
     //  TodoListViewDelegate
     override fun didSelectItem(id: Int, isChecked: Boolean) {
-        Log.d("MainActivity", "id: $id, isChecked: $isChecked")
+        if (isChecked) {
+            this.selectedItems.add(id)
+            this.animateAddButton(true)
+            this.animateRemoveButton(false)
+        } else {
+            this.selectedItems.remove(id)
+            if (this.selectedItems.size == 0) {
+                this.animateAddButton(false)
+                this.animateRemoveButton(true)
+            }
+        }
     }
 
 }
