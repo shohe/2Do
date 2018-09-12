@@ -20,6 +20,8 @@ class TodoListView : FrameLayout {
     val placeLabel: TextView by lazy { findViewById(R.id.placeLabel) as TextView }
     val dateLabel: TextView by lazy { findViewById(R.id.dateLabel) as TextView }
 
+    var id: Int? = 0
+
 
 
     constructor(context: Context) : super(context)
@@ -34,6 +36,7 @@ class TodoListView : FrameLayout {
 
 
     fun setTodo(item: TodoListItem) {
+        this.id = item.id
         this.titleLabel.text = item.title
         this.placeLabel.text = item.place
         this.dateLabel.text = item.date.toString()
@@ -42,7 +45,7 @@ class TodoListView : FrameLayout {
 
     private fun addCheckedHanlder() {
         this.checkBox.setOnClickListener {
-            Log.d("addCheckedHanlder()", "${this.checkBox.isChecked}")
+            Log.d("addCheckedHanlder()", "id: ${id} ,${this.checkBox.isChecked}")
         }
     }
 }
