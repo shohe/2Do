@@ -10,10 +10,13 @@ import com.fubic.a2do.adapter.TodoListAdapter
 import com.fubic.a2do.item.TodoListItem
 import com.fubic.a2do.view.NewTodoDialog
 import com.fubic.a2do.view.NewTodoDialogDelegate
+import com.fubic.a2do.view.TodoListView
+import com.fubic.a2do.view.TodoListViewDelegate
+import kotlinx.android.synthetic.main.activity_main.view.*
 import java.util.*
 
 
-class MainActivity : AppCompatActivity(), NewTodoDialogDelegate {
+class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDelegate {
 
     // XMLOutlet
     private val todoListView: ListView by lazy { findViewById(R.id.todoListView) as ListView }
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate {
             items.add(item)
         }
         this.itemAdapter = TodoListAdapter(this, items)
+        this.itemAdapter!!._delegate = this
         this.todoListView.adapter = this.itemAdapter
     }
 
@@ -79,6 +83,13 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate {
         val item = TodoListItem(this.itemAdapter!!.items.size, todo, place, date)
         this.itemAdapter!!.items.add(item)
         this.itemAdapter!!.notifyDataSetChanged()
+    }
+
+
+    // ---
+    //  TodoListViewDelegate
+    override fun didSelectItem(id: Int, isChecked: Boolean) {
+        Log.d("MainActivity", "id: $id, isChecked: $isChecked")
     }
 
 }
