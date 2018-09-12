@@ -12,6 +12,10 @@ import com.fubic.a2do.item.TodoListItem
  * Created by shoheohtani on 2018/09/10.
  */
 
+interface TodoListViewDelegate {
+    fun didSelectItem(id: Int, isChecked: Boolean)
+}
+
 class TodoListView : FrameLayout {
 
     // XMLOutlet
@@ -19,9 +23,10 @@ class TodoListView : FrameLayout {
     val titleLabel: TextView by lazy { findViewById(R.id.titleLabel) as TextView }
     val placeLabel: TextView by lazy { findViewById(R.id.placeLabel) as TextView }
     val dateLabel: TextView by lazy { findViewById(R.id.dateLabel) as TextView }
+    // -
+    private var id: Int? = 0
 
-    var id: Int? = 0
-
+    var delegate: TodoListViewDelegate? = null
 
 
     constructor(context: Context) : super(context)
@@ -45,7 +50,7 @@ class TodoListView : FrameLayout {
 
     private fun addCheckedHanlder() {
         this.checkBox.setOnClickListener {
-            Log.d("addCheckedHanlder()", "id: ${id} ,${this.checkBox.isChecked}")
+            delegate?.didSelectItem(this.id!!, this.checkBox.isChecked)
         }
     }
 }
