@@ -7,21 +7,23 @@
     tools:context="com.fubic.a2do.activity.MainActivity">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:id="@+id/removeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="24dp"
-        app:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="@+id/frameLayout" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/removeButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="24dp"
+        android:clickable="false"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
         app:layout_constraintEnd_toEndOf="@+id/frameLayout" />
 

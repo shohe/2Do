@@ -81,10 +81,8 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
 
 
     private fun updateButtonStatus() {
-        if (this.itemAdapter!!.items.size == 0) {
-            this.animateRemoveButton(true)
-            this.animateAddButton(false)
-        }
+        this.animateRemoveButton(true)
+        this.animateAddButton(false)
     }
 
 
