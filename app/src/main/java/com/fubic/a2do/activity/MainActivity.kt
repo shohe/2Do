@@ -104,9 +104,11 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
 
     private fun animateAddButton(isHidden: Boolean) {
         if (isHidden) {
+            this.addButton.isClickable = false
             this.addButton.hide()
             this.addButton.animate().translationY(300.0f).alpha(1.0f).setListener(null)
         } else {
+            this.addButton.isClickable = true
             this.addButton.show()
             this.addButton.animate().translationY(0.0f).alpha(1.0f).setListener(null)
         }
@@ -114,9 +116,11 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
 
     private fun animateRemoveButton(isHidden: Boolean) {
         if (isHidden) {
+            this.removeButton.isClickable = false
             this.removeButton.hide()
             this.removeButton.animate().translationY(300.0f).alpha(1.0f).setListener(null)
         } else {
+            this.removeButton.isClickable = true
             this.removeButton.show()
             this.removeButton.animate().translationY(0.0f).alpha(1.0f).setListener(null)
         }
