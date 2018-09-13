@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
     private fun initListView() {
         val items = arrayListOf<TodoListItem>()
         for (i in 0..5) {
-            val item = TodoListItem(i, "studying kotlin", "office", Date())
+            val item = TodoListItem(i, "studying kotlin $i", "office", Date())
             items.add(item)
         }
         this.itemAdapter = TodoListAdapter(this, items)
@@ -69,10 +69,21 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
 
         this.removeButton.setOnClickListener {
             for (id in this.selectedItems) {
-                this.itemAdapter!!.items.remove(this.itemAdapter!!.getItem(id))
+                val item = this.todoListView.getItemAtPosition(id)
+                this.itemAdapter!!.items.remove(item)
             }
             this.itemAdapter!!.notifyDataSetChanged()
+            this.todoListView.adapter = this.itemAdapter
             this.selectedItems.clear()
+            this.updateButtonStatus()
+        }
+    }
+
+
+    private fun updateButtonStatus() {
+        if (this.itemAdapter!!.items.size == 0) {
+            this.animateRemoveButton(true)
+            this.animateAddButton(false)
         }
     }
 
@@ -125,7 +136,7 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
 
     // ---
     //  TodoListViewDelegate
-    override fun didSelectItem(id: Int, isChecked: Boolean) {
+    override fun didSelectItem(listView: TodoListView, id: Int, isChecked: Boolean) {
         if (isChecked) {
             this.selectedItems.add(id)
             this.animateAddButton(true)

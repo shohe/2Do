@@ -13,7 +13,7 @@ import com.fubic.a2do.item.TodoListItem
  */
 
 interface TodoListViewDelegate {
-    fun didSelectItem(id: Int, isChecked: Boolean)
+    fun didSelectItem(listView: TodoListView, id: Int, isChecked: Boolean)
 }
 
 class TodoListView : FrameLayout {
@@ -50,7 +50,7 @@ class TodoListView : FrameLayout {
 
     private fun addCheckedHanlder() {
         this.checkBox.setOnClickListener {
-            delegate?.didSelectItem(this.id!!, this.checkBox.isChecked)
+            delegate?.didSelectItem(this, this.id!!, this.checkBox.isChecked)
         }
     }
 }
