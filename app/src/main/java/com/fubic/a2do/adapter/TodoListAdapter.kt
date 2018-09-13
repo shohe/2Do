@@ -30,7 +30,6 @@ class TodoListAdapter(private val context: Context, var items: ArrayList<TodoLis
     }
 
     override fun getItem(position: Int): Any {
-        // todo: check here tmr...
         for (item in this.items) {
             if (item.id == position) return item
         }

@@ -14,7 +14,7 @@ import com.fubic.a2do.view.NewTodoDialog
 import com.fubic.a2do.view.NewTodoDialogDelegate
 import com.fubic.a2do.view.TodoListView
 import com.fubic.a2do.view.TodoListViewDelegate
-import kotlinx.android.synthetic.main.activity_main.view.*
+import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import java.util.*
 import kotlin.collections.ArrayList
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
 
 
     private fun initListView() {
-        val items = this.createDataList() as ArrayList<TodoListItem>
+        val items = this.fetchDataList() as ArrayList<TodoListItem>
         this.itemAdapter = TodoListAdapter(this, items)
         this.itemAdapter!!._delegate = this
         this.todoListView.adapter = this.itemAdapter
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
     }
 
 
-    private fun createDataList() : List<TodoListItem> {
+    private fun fetchDataList() : List<TodoListItem> {
         val helper : DBOpenHelper = DBOpenHelper.getInstance(this)
         val dataList = helper.readableDatabase.select(DBOpenHelper.tableName).parseList<TodoListItem>(ListDataParser())
         return dataList
@@ -139,6 +139,11 @@ class MainActivity : AppCompatActivity(), NewTodoDialogDelegate, TodoListViewDel
         val item = TodoListItem(this.itemAdapter!!.items.size, todo, place, date)
         this.itemAdapter!!.items.add(item)
         this.itemAdapter!!.notifyDataSetChanged()
+
+        val helper: DBOpenHelper = DBOpenHelper.getInstance(this)
+        helper.use {
+            insert(DBOpenHelper.tableName, *arrayOf("id" to item.id, "title" to item.title, "place" to item.place, "date" to item.date.toString()))
+        }
     }
 
 
